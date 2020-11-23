@@ -23,7 +23,6 @@ public class Cliente {
 			ObjectInputStream ois = new ObjectInputStream(skCliente.getInputStream());
 			p = (Persona) ois.readObject();// guardar el objeto recibido
 			System.out.println(p.toString());
-			// hasta aki funciona, recibe y lo pinta
 
 			p.setNombre("Carmen");
 			p.setFechaNacimiento("1983, 1, 1");

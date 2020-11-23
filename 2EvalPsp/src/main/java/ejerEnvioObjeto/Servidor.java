@@ -20,7 +20,7 @@ public class Servidor {
 		p.setApellido("Juana Zubiri");
 		p.setGenero('H');
 		p.setFechaNacimiento("1990, 12, 12");
-		// System.out.println(p.toString());
+		System.out.println(p.toString());
 		try {
 			skServidor = new ServerSocket(PUERTO);
 			System.out.println("Escutxando el puerto " + PUERTO);
