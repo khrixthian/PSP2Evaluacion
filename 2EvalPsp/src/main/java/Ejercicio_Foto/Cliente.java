@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -15,7 +16,7 @@ public class Cliente extends JFrame {
 	private JLabel label;
 
 	public Cliente() throws ClassNotFoundException {
-		setSize(550, 300);
+		setSize(516, 465);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
@@ -39,9 +40,9 @@ public class Cliente extends JFrame {
 			e.printStackTrace();
 		}
 		// pegar la foto a la label
-		label = new JLabel(".//copia.jpg");
+		label = new JLabel(new ImageIcon(".//copia.jpg"));
 
-		label.setBounds(80, 46, 281, 159);
+		label.setBounds(80, 46, 370, 322);
 		getContentPane().add(label);
 	}
 
