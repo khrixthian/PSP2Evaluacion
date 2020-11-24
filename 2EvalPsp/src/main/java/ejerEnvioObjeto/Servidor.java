@@ -28,18 +28,14 @@ public class Servidor {
 			while ((socket = skServidor.accept()) != null) {
 				System.out.println("Conexion desde: " + socket.getInetAddress());
 				// envio del objeto
-				ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
-				os.writeObject(p);
+				ObjectOutputStream salida = new ObjectOutputStream(socket.getOutputStream());
+				ObjectInputStream entrada = new ObjectInputStream(socket.getInputStream());
+				salida.writeObject(p);
 
 				// recibir el objeto modificado
-				ServerSocket xaRecibir = new ServerSocket(5100);
-				Socket skrecibirCliente;
-				while ((skrecibirCliente = xaRecibir.accept()) != null) {
-					ois = new ObjectInputStream(skrecibirCliente.getInputStream());
-					pRecibida = (Persona) ois.readObject();
-					System.out.println(pRecibida.toString());
-					skrecibirCliente.close();
-				}
+				pRecibida = (Persona) entrada.readObject();
+				System.out.println(pRecibida.toString());
+
 				socket.close();
 			}
 

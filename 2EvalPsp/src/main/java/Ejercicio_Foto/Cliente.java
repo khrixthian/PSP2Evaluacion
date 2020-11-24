@@ -32,15 +32,14 @@ public class Cliente extends JFrame {
 			entrada.read(recibido);// guarda en recibido los bytes enviados por el servidor
 			f.write(recibido);// convierte los bytes en la nueva foto
 
-			// pegar la foto a la label
-			// label = new JLabel(copia);
-
 			entrada.close();
 			skCliente.close();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		// pegar la foto a la label
+		label = new JLabel(".//copia.jpg");
 
 		label.setBounds(80, 46, 281, 159);
 		getContentPane().add(label);

@@ -20,24 +20,20 @@ public class Cliente {
 		try {
 			skCliente = new Socket(HOST, PUERTO);
 
-			ObjectInputStream ois = new ObjectInputStream(skCliente.getInputStream());
-			p = (Persona) ois.readObject();// guardar el objeto recibido
+			ObjectInputStream entrada = new ObjectInputStream(skCliente.getInputStream());
+			ObjectOutputStream salida = new ObjectOutputStream(skCliente.getOutputStream());
+			p = (Persona) entrada.readObject();// guardar el objeto recibido
 			System.out.println(p.toString());
 
 			p.setNombre("Carmen");
 			p.setFechaNacimiento("1983, 1, 1");
-
+			// envio del objeto modificado
+			salida.writeObject(p);
 			skCliente.close();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// para enviarlo hay que hacer otro socket
-		Socket xaEnvio = new Socket(HOST, 5100);
-		os = new ObjectOutputStream(xaEnvio.getOutputStream());
-		os.writeObject(p);
-		System.out.println("ahora lo envio");
-		xaEnvio.close();
 
 	}
 
