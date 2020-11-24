@@ -14,6 +14,7 @@ public class Cliente extends JFrame {
 	static final String HOST = "localhost";
 	static final int PUERTO = 5000;
 	private JLabel label;
+	private FileOutputStream f;
 
 	public Cliente() throws ClassNotFoundException {
 		setSize(516, 465);
@@ -26,8 +27,8 @@ public class Cliente extends JFrame {
 			DataInputStream entrada = new DataInputStream(skCliente.getInputStream());
 			int tamanyo = entrada.readInt(); // guarda el tamaño del fichero que recibira
 			byte recibido[] = new byte[tamanyo]; // array donde guardare los bytes del fichero
-			FileOutputStream f = new FileOutputStream(".//copia.jpg");// donde guardara el fichero recibido y de paso le
-																		// cambio el nombre
+			f = new FileOutputStream(".//copia.jpg");// donde guardara el fichero recibido y de paso le
+														// cambio el nombre
 			entrada.read(recibido);// guarda en recibido los bytes enviados por el servidor
 			f.write(recibido);// convierte los bytes en la nueva foto
 
@@ -38,7 +39,12 @@ public class Cliente extends JFrame {
 			e.printStackTrace();
 		}
 		// pegar la foto a la label
-		label = new JLabel(new ImageIcon(".//copia.jpg"));
+		if (f == null) {
+			label = new JLabel();
+			label.setText("imagen no disponible");
+		} else {
+			label = new JLabel(new ImageIcon(".//copia.jpg"));
+		}
 
 		label.setBounds(80, 46, 370, 322);
 		getContentPane().add(label);
