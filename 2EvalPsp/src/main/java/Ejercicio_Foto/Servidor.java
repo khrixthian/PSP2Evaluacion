@@ -27,8 +27,6 @@ public class Servidor {
 				System.out.println("Conexion desde: " + socket.getInetAddress());
 				// envio del objeto
 				DataOutputStream salida = new DataOutputStream(socket.getOutputStream());
-//				salida.writeObject(fotoE);
-//				salida.close();
 
 				File fich = new File(urlFoto);
 				int tam = (int) fich.length();// tamaño del fichero

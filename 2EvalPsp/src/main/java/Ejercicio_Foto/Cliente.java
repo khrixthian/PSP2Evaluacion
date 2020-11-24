@@ -20,8 +20,6 @@ public class Cliente extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
-		// label = new JLabel("");
-
 		try {
 			skCliente = new Socket(HOST, PUERTO);
 
