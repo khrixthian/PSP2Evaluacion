@@ -37,6 +37,7 @@ public class Servidor {
 				is.read(leido);// guardar en leido los bytes del fichero
 
 				salida.write(leido); // envio del array de bytes
+				salida.close();
 				is.close();
 				socket.close();
 			}

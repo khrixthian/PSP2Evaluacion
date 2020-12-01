@@ -12,8 +12,6 @@ public class Cliente {
 	static final int PUERTO = 5000;
 	private Persona p;
 	private Socket skCliente;
-	private boolean objModificado = false;
-	private ObjectOutputStream os;
 
 	public Cliente() throws ClassNotFoundException, UnknownHostException, IOException {
 
@@ -29,6 +27,7 @@ public class Cliente {
 			p.setFechaNacimiento("1983, 1, 1");
 			// envio del objeto modificado
 			salida.writeObject(p);
+			salida.close();
 			skCliente.close();
 
 		} catch (IOException e) {
