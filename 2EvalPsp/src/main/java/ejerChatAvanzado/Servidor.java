@@ -57,12 +57,13 @@ public class Servidor extends Thread {
 
 					recibir = new HiloRecibirS(salida, entrada, textarea, texto, lista);
 					recibir.start();
-					serverSocket2 = new ServerSocket(PUERTO2);
-					socket2 = serverSocket.accept();
-					enviar = new ObjectOutputStream(socket2.getOutputStream());
-					enviar.writeObject("*");
-					socket2.close();
-					serverSocket2.close();
+
+//					serverSocket2 = new ServerSocket(PUERTO2);
+//					socket2 = serverSocket.accept();
+//					enviar = new ObjectOutputStream(socket2.getOutputStream());
+//					enviar.writeObject("*");
+//					socket2.close();
+//					serverSocket2.close();
 				}
 				// textarea.setText(msjConexiones);
 			} catch (IOException e) {

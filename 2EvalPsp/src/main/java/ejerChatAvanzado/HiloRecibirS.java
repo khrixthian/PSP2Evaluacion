@@ -3,12 +3,16 @@ package ejerChatAvanzado;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class HiloRecibirS extends Thread {
+	private final String HOST = "localhost";
+	private final int PUERTO = 5000;
+	private Socket skCliente;
 	private ObjectOutputStream salida;
 	private ObjectInputStream entrada;
 	private JTextArea textarea;
@@ -27,6 +31,8 @@ public class HiloRecibirS extends Thread {
 	public void run() {
 		while (true) {
 			try {
+				skCliente = new Socket(HOST, PUERTO);
+				ObjectInputStream entrada = new ObjectInputStream(skCliente.getInputStream());
 				String mensaje = (String) entrada.readObject();
 				System.out.println(mensaje);
 				for (int i = 0; i < lista.size(); i++) {

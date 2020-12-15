@@ -17,7 +17,7 @@ public class VentanaIntro extends JFrame {
 	private JTextField textField;
 	private Socket skCliente;
 	private final String HOST = "localhost";
-	private final int PUERTO = 5100;
+	private final int PUERTO = 5000;
 	private ObjectInputStream entrada;
 	private ObjectInputStream flujo;
 
