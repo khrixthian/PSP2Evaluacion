@@ -1,8 +1,6 @@
 package ejerChatAvanzado;
 
 import java.awt.event.ActionEvent;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
@@ -12,9 +10,9 @@ import javax.swing.JTextField;
 
 public class VentanaServidor extends JFrame {
 	private JTextField textField;
-	private final int PUERTO = 5000;
-	ServerSocket skServidor;
-	Socket socket;
+//	private final int PUERTO = 5000;
+//	ServerSocket skServidor;
+//	Socket socket;
 
 	public VentanaServidor() {
 		setSize(450, 320);

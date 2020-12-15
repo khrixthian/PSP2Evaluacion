@@ -3,6 +3,10 @@ package ejerChatAvanzado;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.Socket;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
@@ -12,6 +16,11 @@ import javax.swing.JTextField;
 
 public class VentanaIntro extends JFrame {
 	private JTextField textField;
+	private Socket skCliente;
+	private final String HOST = "localhost";
+	private final int PUERTO = 5000;
+	private InputStream entrada;
+	private DataInputStream flujo;
 
 	public VentanaIntro() {
 		setSize(276, 170);
@@ -39,16 +48,33 @@ public class VentanaIntro extends JFrame {
 		lblMensaje.setBounds(22, 61, 229, 14);
 		getContentPane().add(lblMensaje);
 
+		// aki hace una conexion con el servidor
+		try {
+			skCliente = new Socket(HOST, PUERTO);
+			entrada = skCliente.getInputStream();
+			flujo = new DataInputStream(entrada);
+			System.out.println(flujo.readUTF());
+			skCliente.close();
+
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
 		btnNewButton_1.addActionListener(new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
 				if (textField.getText().equals("")) {
 					lblMensaje.setText("Debe introducir un nick");
+				} else if (flujo == null) {
+					lblMensaje.setText("Error al conectarse");
 				} else {
+					VentanaCliente ventana = new VentanaCliente();
+					ventana.setVisible(true);
 					setVisible(false);
 					dispose();
 				}
 			}
 		});
+
 	}
 
 	public static void main(String[] args) {

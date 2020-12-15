@@ -1,8 +1,10 @@
 package ejerChatAvanzado;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -23,6 +25,9 @@ public class Servidor extends Thread {
 	private ObjectOutputStream salida = null;
 	private String msjConexiones;
 	private HiloRecibirS recibir;
+	private Socket socket2;
+	private DataOutputStream enviar;
+	private OutputStream auxenviar;
 
 	public Servidor(JTextArea textarea, JTextField texto) {
 		this.textarea = textarea;
@@ -51,6 +56,12 @@ public class Servidor extends Thread {
 					recibir = new HiloRecibirS(salida, entrada, textarea, texto, lista);
 					recibir.start();
 
+					socket2 = serverSocket.accept();
+					auxenviar = socket2.getOutputStream();
+					enviar = new DataOutputStream(auxenviar);
+					enviar.writeUTF("*");
+					socket2.close();
+
 				}
 				// textarea.setText(msjConexiones);
 			} catch (IOException e) {
@@ -66,6 +77,8 @@ public class Servidor extends Thread {
 						entrada.close();
 					if (salida != null)
 						salida.close();
+					if (enviar != null)
+						enviar.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
