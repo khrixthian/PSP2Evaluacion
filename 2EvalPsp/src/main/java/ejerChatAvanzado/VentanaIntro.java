@@ -3,9 +3,8 @@ package ejerChatAvanzado;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 
 import javax.swing.AbstractAction;
@@ -18,9 +17,9 @@ public class VentanaIntro extends JFrame {
 	private JTextField textField;
 	private Socket skCliente;
 	private final String HOST = "localhost";
-	private final int PUERTO = 5000;
-	private InputStream entrada;
-	private DataInputStream flujo;
+	private final int PUERTO = 5100;
+	private ObjectInputStream entrada;
+	private ObjectInputStream flujo;
 
 	public VentanaIntro() {
 		setSize(276, 170);
@@ -51,12 +50,15 @@ public class VentanaIntro extends JFrame {
 		// aki hace una conexion con el servidor
 		try {
 			skCliente = new Socket(HOST, PUERTO);
-			entrada = skCliente.getInputStream();
-			flujo = new DataInputStream(entrada);
-			System.out.println(flujo.readUTF());
+			entrada = new ObjectInputStream(skCliente.getInputStream());
+			String recibido = (String) entrada.readObject();
+			System.out.println(recibido);
 			skCliente.close();
 
 		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Bloque catch generado automáticamente
 			e1.printStackTrace();
 		}
 

@@ -1,6 +1,5 @@
 package ejerChatAvanzado;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -13,7 +12,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class Servidor extends Thread {
-	private final int PUERTO = 5000;
+	private final int PUERTO1 = 5000;
 	private ArrayList<ObjectOutputStream> lista;
 	private JTextArea textarea;
 	private JTextField texto;
@@ -24,9 +23,12 @@ public class Servidor extends Thread {
 	private ObjectInputStream entrada = null;
 	private ObjectOutputStream salida = null;
 	private String msjConexiones;
+
+	private ServerSocket serverSocket2;
+	private final int PUERTO2 = 5100;
 	private HiloRecibirS recibir;
 	private Socket socket2;
-	private DataOutputStream enviar;
+	private ObjectOutputStream enviar;
 	private OutputStream auxenviar;
 
 	public Servidor(JTextArea textarea, JTextField texto) {
@@ -38,7 +40,7 @@ public class Servidor extends Thread {
 	public void run() {
 		if (activo == true) {
 			try {
-				serverSocket = new ServerSocket(PUERTO);
+				serverSocket = new ServerSocket(PUERTO1);
 				texto.setText("Conexiones actuales= " + conexiones);
 				msjConexiones = "Esperando conexiones...";
 				textarea.setText(msjConexiones);
@@ -55,13 +57,12 @@ public class Servidor extends Thread {
 
 					recibir = new HiloRecibirS(salida, entrada, textarea, texto, lista);
 					recibir.start();
-
+					serverSocket2 = new ServerSocket(PUERTO2);
 					socket2 = serverSocket.accept();
-					auxenviar = socket2.getOutputStream();
-					enviar = new DataOutputStream(auxenviar);
-					enviar.writeUTF("*");
+					enviar = new ObjectOutputStream(socket2.getOutputStream());
+					enviar.writeObject("*");
 					socket2.close();
-
+					serverSocket2.close();
 				}
 				// textarea.setText(msjConexiones);
 			} catch (IOException e) {

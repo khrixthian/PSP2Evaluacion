@@ -35,6 +35,9 @@ public class VentanaServidor extends JFrame {
 		btnNewButton.setBounds(165, 227, 89, 23);
 		getContentPane().add(btnNewButton);
 
+		Servidor servidor = new Servidor(textArea, textField);
+		servidor.start();
+
 		btnNewButton.addActionListener(new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
