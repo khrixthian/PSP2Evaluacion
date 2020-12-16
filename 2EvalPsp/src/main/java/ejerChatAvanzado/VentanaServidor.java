@@ -1,6 +1,7 @@
 package ejerChatAvanzado;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
@@ -10,6 +11,7 @@ import javax.swing.JTextField;
 
 public class VentanaServidor extends JFrame {
 	private JTextField textField;
+	private Servidor servidor;
 
 	public VentanaServidor() {
 		setSize(450, 320);
@@ -32,12 +34,20 @@ public class VentanaServidor extends JFrame {
 		btnNewButton.setBounds(165, 227, 89, 23);
 		getContentPane().add(btnNewButton);
 
-		Servidor servidor = new Servidor(textArea, textField);
+		servidor = new Servidor(textArea, textField);
 		servidor.start();
 
 		btnNewButton.addActionListener(new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				// para que deje lanzar varias ventanaIntro
+				// pero de momento la 2 no se conecta creo que por que intenta ir al mismo
+				// puerto
+				try {
+					servidor.desconectar();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				dispose();
 			}
 		});

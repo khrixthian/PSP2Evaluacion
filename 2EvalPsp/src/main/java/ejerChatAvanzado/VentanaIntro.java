@@ -65,6 +65,13 @@ public class VentanaIntro extends JFrame {
 				} else if (conectado == false) {
 					lblMensaje.setText("Error al conectarse");
 				} else {
+					try {
+						entrada.close();
+						skCliente.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					dispose();
 					VentanaCliente ventana = new VentanaCliente();
 					ventana.setVisible(true);

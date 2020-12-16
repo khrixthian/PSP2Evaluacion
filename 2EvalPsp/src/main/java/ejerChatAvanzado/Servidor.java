@@ -47,19 +47,27 @@ public class Servidor extends Thread {
 
 				while (conexiones <= 3) {
 					socket = serverSocket.accept();
+					conexiones += 1;
+					System.out.println("se ha conectado");// sale en cuanto sale la ventanaIntro
+					texto.setText("Conexiones actuales= " + conexiones);
+					msjConexiones = msjConexiones + "\n" + "Un cliente se ha conectado";
+					textarea.setText(msjConexiones);
 					salida = new ObjectOutputStream(socket.getOutputStream());
 					entrada = new ObjectInputStream(socket.getInputStream());
 					salida.writeObject("Soy evaristo el rey de la baraja");
 					lista.add(salida);
-					conexiones += 1;
+
+//					recibir = new HiloRecibirS(salida, entrada, textarea, texto, lista);
+//					recibir.start();
+
+				}
+
+				if (conexiones != 0) {
 
 					texto.setText("");
 					texto.setText("Conexiones actuales= " + conexiones);
 					msjConexiones = msjConexiones + "\n" + "Un cliente se ha conectado";
 					textarea.setText(msjConexiones);
-//					System.out.println(msjConexiones);
-//					recibir = new HiloRecibirS(salida, entrada, textarea, texto, lista);
-//					recibir.start();
 
 				}
 			} catch (IOException e) {
@@ -84,8 +92,16 @@ public class Servidor extends Thread {
 		}
 	}
 
-	public void desconectar() {
+	public Boolean getActivo() {
+		return activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
+
+	public void desconectar() throws IOException {
 		System.out.println("comprobando desconectar de servidor");
-		activo = false;
+		serverSocket.close();
 	}
 }
