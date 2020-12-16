@@ -58,8 +58,8 @@ public class Servidor extends Thread {
 					msjConexiones = msjConexiones + "\n" + "Un cliente se ha conectado";
 					textarea.setText(msjConexiones);
 //					System.out.println(msjConexiones);
-					recibir = new HiloRecibirS(salida, entrada, textarea, texto, lista);
-					recibir.start();
+//					recibir = new HiloRecibirS(salida, entrada, textarea, texto, lista);
+//					recibir.start();
 
 				}
 			} catch (IOException e) {
