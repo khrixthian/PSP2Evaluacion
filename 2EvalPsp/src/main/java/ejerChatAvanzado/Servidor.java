@@ -46,6 +46,7 @@ public class Servidor extends Thread {
 				textarea.setText(msjConexiones);
 
 				while (conexiones <= 3) {
+					socket = new Socket();
 					socket = serverSocket.accept();
 					conexiones += 1;
 					System.out.println("se ha conectado");// sale en cuanto sale la ventanaIntro
@@ -59,15 +60,6 @@ public class Servidor extends Thread {
 
 //					recibir = new HiloRecibirS(salida, entrada, textarea, texto, lista);
 //					recibir.start();
-
-				}
-
-				if (conexiones != 0) {
-
-					texto.setText("");
-					texto.setText("Conexiones actuales= " + conexiones);
-					msjConexiones = msjConexiones + "\n" + "Un cliente se ha conectado";
-					textarea.setText(msjConexiones);
 
 				}
 			} catch (IOException e) {
