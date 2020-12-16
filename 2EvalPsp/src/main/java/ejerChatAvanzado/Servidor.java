@@ -52,20 +52,16 @@ public class Servidor extends Thread {
 					salida.writeObject("Soy evaristo el rey de la baraja");
 					lista.add(salida);
 					conexiones += 1;
-					texto.setText("Conexiones actuales= " + conexiones);
-					// msjConexiones = msjConexiones + "\n" + "Un cliente se ha conectado";
 
+					texto.setText("");
+					texto.setText("Conexiones actuales= " + conexiones);
+					msjConexiones = msjConexiones + "\n" + "Un cliente se ha conectado";
+					textarea.setText(msjConexiones);
+//					System.out.println(msjConexiones);
 					recibir = new HiloRecibirS(salida, entrada, textarea, texto, lista);
 					recibir.start();
 
-//					serverSocket2 = new ServerSocket(PUERTO2);
-//					socket2 = serverSocket.accept();
-//					enviar = new ObjectOutputStream(socket2.getOutputStream());
-//					enviar.writeObject("*");
-//					socket2.close();
-//					serverSocket2.close();
 				}
-				// textarea.setText(msjConexiones);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

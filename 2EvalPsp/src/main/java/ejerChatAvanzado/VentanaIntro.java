@@ -20,6 +20,7 @@ public class VentanaIntro extends JFrame {
 	private final int PUERTO = 5000;
 	private ObjectInputStream entrada;
 	private ObjectInputStream flujo;
+	private boolean conectado;
 
 	public VentanaIntro() {
 		setSize(276, 170);
@@ -51,14 +52,9 @@ public class VentanaIntro extends JFrame {
 		try {
 			skCliente = new Socket(HOST, PUERTO);
 			entrada = new ObjectInputStream(skCliente.getInputStream());
-			String recibido = (String) entrada.readObject();
-			System.out.println(recibido);
-			skCliente.close();
+			conectado = true;
 
 		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Bloque catch generado automáticamente
 			e1.printStackTrace();
 		}
 
@@ -66,13 +62,12 @@ public class VentanaIntro extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (textField.getText().equals("")) {
 					lblMensaje.setText("Debe introducir un nick");
-				} else if (flujo == null) {
+				} else if (conectado == false) {
 					lblMensaje.setText("Error al conectarse");
 				} else {
+					dispose();
 					VentanaCliente ventana = new VentanaCliente();
 					ventana.setVisible(true);
-					setVisible(false);
-					dispose();
 				}
 			}
 		});

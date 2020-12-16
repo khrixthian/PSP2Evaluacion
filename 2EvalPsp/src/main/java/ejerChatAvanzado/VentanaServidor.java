@@ -10,9 +10,6 @@ import javax.swing.JTextField;
 
 public class VentanaServidor extends JFrame {
 	private JTextField textField;
-//	private final int PUERTO = 5000;
-//	ServerSocket skServidor;
-//	Socket socket;
 
 	public VentanaServidor() {
 		setSize(450, 320);
