@@ -54,8 +54,8 @@ public class Servidor extends Thread {
 					msjConexiones = msjConexiones + "\n" + "Un cliente se ha conectado";
 					textarea.setText(msjConexiones);
 					salida = new ObjectOutputStream(socket.getOutputStream());
-					entrada = new ObjectInputStream(socket.getInputStream());
-					salida.writeObject("Soy evaristo el rey de la baraja");
+					// entrada = new ObjectInputStream(socket.getInputStream());
+					// salida.writeObject("Soy evaristo el rey de la baraja");
 					lista.add(salida);
 
 //					recibir = new HiloRecibirS(salida, entrada, textarea, texto, lista);
