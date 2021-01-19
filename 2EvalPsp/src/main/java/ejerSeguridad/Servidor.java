@@ -52,6 +52,7 @@ public class Servidor {
 					salida3.writeObject("No es lo mismo");
 				salida3.close();
 				socket.close();
+				skServidor.close(); // cierra el servidor
 			}
 
 		} catch (IOException e) {
