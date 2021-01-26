@@ -131,7 +131,7 @@ public class Servidor {
 				Peticion peti2 = new Peticion();
 				peti2 = (Peticion) fentrada.readObject();
 
-				if (peti2.getImagen().equals("0")) {
+				if (!peti2.getImagen().equals("0")) {
 
 					File fich = new File(url);
 					int tam = (int) fich.length();
@@ -142,10 +142,15 @@ public class Servidor {
 					is.read(leido);
 
 					salida.write(leido);
+					fsalida.close();
+					fentrada.close();
+					salida.close();
+					entrada.close();
+					socket.close();
+					skServidor.close();
 				}
 
 			}
-
 		}
 
 	}

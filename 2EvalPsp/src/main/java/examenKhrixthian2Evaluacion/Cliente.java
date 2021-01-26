@@ -78,10 +78,18 @@ public class Cliente {
 			// recibo la imagen
 			int tamanyo = entrada.readInt();
 			byte recibido[] = new byte[tamanyo];
-			FileOutputStream f = new FileOutputStream(".//imagen.jpg");
+			FileOutputStream f = new FileOutputStream(
+					"H:\\DAM\\PSP\\psp2evaluacion\\2EvalPSP\\src\\main\\java\\examenKhrixthian2Evaluacion\\imagen.jpg");
 
 			entrada.read(recibido);
 			f.write(recibido);
+
+			f.close();
+			entrada.close();
+			salida.close();
+			fentrada.close();
+			fsalida.close();
+			Cliente.close();
 
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
